@@ -117,9 +117,15 @@ public class FULL_TELEOP_1P extends OpMode {
 
         float liftControlUp = gamepad1.right_trigger;
         float liftControlDown = gamepad1.left_trigger;
-        liftMotor.setPower(-liftControlDown);
-        liftMotor.setPower(liftControlUp);
-
+        while(gamepad1.right_trigger>0.0) {
+            liftMotor.setPower(1.0);
+        }
+        while(gamepad1.left_trigger>0.0) {
+            liftMotor.setPower(-1.0); // hello erin
+        }
+        if(gamepad1.right_trigger<= 0.0 && gamepad1.left_trigger<=0.0) {
+            liftMotor.setPower(0.0);
+        }
         /*
         ---INTAKE WHEELS---
          */

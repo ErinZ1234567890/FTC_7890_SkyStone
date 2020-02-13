@@ -102,7 +102,7 @@ public class FULL_AUTO_BSTONE extends OpMode
         distanceSensor = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "distance sensor");
         ts = hardwareMap.get(DigitalChannel.class, "ts");
         colorSensor = hardwareMap.get(ColorSensor.class, "color sensor");
-        stoneSensor = hardwareMap.get(ColorSensor.class, "stone sensor");
+        stoneSensor = hardwareMap.get(ColorSensor.class, "stone sensor L");
 
         /*
         ---MOTOR DIRECTIONS---
@@ -124,7 +124,7 @@ public class FULL_AUTO_BSTONE extends OpMode
          */
         initialMoveState = new ColorSenseStopState(motors, stoneSensor, "black and yellow", 0.2, "backward");
         stoneState = new ColorSenseMoveState(motors, stoneSensor, "yellow", 0.5, "left");
-        armState = new armMotorState(armMotor, -0.3);
+        armState = new armMotorState(armMotor, -0.5);
         moveState = new MoveState(motors, 750, 0.3);
         //moveState = new distanceMoveState(motors, distanceSensor, 12, 0.5);
         turnState = new GyroTurnCCWByPID(70, 0.3, motors, imu);

@@ -37,31 +37,31 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 public class ColorTest extends LinearOpMode{
     private ElapsedTime     runtime = new ElapsedTime();
 
-    ColorSensor depotSensor;
-    ColorSensor stoneSensor;
+    ColorSensor sensorColor;
 
     public void runOpMode() {
-        depotSensor = hardwareMap.get(ColorSensor.class, "color sensor");
-        stoneSensor = hardwareMap.get(ColorSensor.class, "stone sensor");
+        sensorColor = hardwareMap.get(ColorSensor.class, "color sensor");
+       // stoneSensor = hardwareMap.get(ColorSensor.class, "stone sensor L");
 
                 waitForStart();
 
         while(opModeIsActive()) {
-            if (depotSensor.red() > depotSensor.blue() && depotSensor.red() > depotSensor.green()) {
-                telemetry.addData("color: ", "red");
-                telemetry.update();
-            }
-            else if (depotSensor.blue() > depotSensor.red() && depotSensor.blue() > depotSensor.green()) {
-                telemetry.addData("color: ", "blue");
-                telemetry.update();
-            }
-            else {
-                telemetry.addData("color: ", "nothing");
-                telemetry.update();
-            }
-            telemetry.addData("blue ", depotSensor.blue());
-            telemetry.addData("red ", depotSensor.red());
-            telemetry.addData("green ", depotSensor.green());
+//            if (depotSensor.red() > depotSensor.blue() && depotSensor.red() > depotSensor.green()) {
+//                telemetry.addData("color: ", "red");
+//                telemetry.update();
+//            }
+//            else if (depotSensor.blue() > depotSensor.red() && depotSensor.blue() > depotSensor.green()) {
+//                telemetry.addData("color: ", "blue");
+//                telemetry.update();
+//            }
+//            else {
+//                telemetry.addData("color: ", "nothing");
+//                telemetry.update();
+//            }
+            telemetry.addData("blue ", sensorColor.blue());
+            telemetry.addData("red ", sensorColor.red());
+            telemetry.addData("green ", sensorColor.green());
+            telemetry.update();
         }
 
     }
