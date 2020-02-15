@@ -102,7 +102,7 @@ public class FULL_AUTO_RSTONE extends OpMode
         distanceSensor = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "distance sensor");
         ts = hardwareMap.get(DigitalChannel.class, "ts");
         colorSensor = hardwareMap.get(ColorSensor.class, "color sensor");
-        stoneSensorR = hardwareMap.get(ColorSensor.class, "stone sensor R");
+        stoneSensorL = hardwareMap.get(ColorSensor.class, "stone sensor L");
         stoneSensorR = hardwareMap.get(ColorSensor.class, "stone sensor R");
 
         /*
