@@ -103,11 +103,18 @@ public class FULL_TELEOP_1P extends OpMode {
          */
         //We set the power to wheels based off the values calculated above. We can move
         //in all directions based off of the combinations inputted by the driver.
+        if(gamepad1.right_bumper){
+            leftFront.setPower(lfDrive/2);
+            leftBack.setPower(lbDrive/2);
+            rightFront.setPower(rfDrive/2);
+            rightBack.setPower(rbDrive/2);
+        }else{
+            leftFront.setPower(lfDrive);
+            leftBack.setPower(lbDrive);
+            rightFront.setPower(rfDrive);
+            rightBack.setPower(rbDrive);
+        }
 
-        leftFront.setPower(lfDrive);
-        leftBack.setPower(lbDrive);
-        rightFront.setPower(rfDrive);
-        rightBack.setPower(rbDrive);
 
         /*
         ---LIFT CONTROLLER SETUP---
@@ -117,10 +124,10 @@ public class FULL_TELEOP_1P extends OpMode {
 
         float liftControlUp = gamepad1.right_trigger;
         float liftControlDown = gamepad1.left_trigger;
-        while(gamepad1.right_trigger>0.0) {
+        if(gamepad1.right_trigger>0.0) {
             liftMotor.setPower(1.0);
         }
-        while(gamepad1.left_trigger>0.0) {
+        if(gamepad1.left_trigger>0.0) {
             liftMotor.setPower(-1.0); // hello erin
         }
         if(gamepad1.right_trigger<= 0.0 && gamepad1.left_trigger<=0.0) {
@@ -133,14 +140,11 @@ public class FULL_TELEOP_1P extends OpMode {
         //mechanism. You press the button once to activate the wheels and then press
         //the button again to switch the direction of the wheels.
 
-        if(gamepad1.x && spin == 0){
-            //first time around
-            spin = 1; //whenever you turn it on it will do 1
-        }else if(gamepad1.x && (spin != 1)){
+        if(gamepad1.x){
             spin = 1;
-        }else if(gamepad1.x && (spin != -1)){
-            spin = -1;
         }else if(gamepad1.y){
+            spin = -1;
+        }else if(gamepad1.left_bumper){
             spin = 0;
         }
         intakeMotor.setPower(spin);
