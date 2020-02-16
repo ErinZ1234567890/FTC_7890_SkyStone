@@ -35,11 +35,6 @@ public class FULL_AUTO_BT extends OpMode
     DcMotor armMotor;
 
     /*
-    ---SERVOS---
-     */
-    //there are no sensors in this code
-
-    /*
     ---SENSORS---
      */
     ModernRoboticsI2cRangeSensor distanceSensor;
