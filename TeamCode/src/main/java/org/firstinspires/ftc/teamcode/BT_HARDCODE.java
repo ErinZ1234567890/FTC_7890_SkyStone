@@ -55,6 +55,7 @@ public class BT_HARDCODE extends OpMode
     armMotorState lockState2;
     GyroTurnCCWByPID turnState2;
     ColorSenseStopState parkState;
+    MoveState stopState;
 
     ArrayList<DcMotor> motors = new ArrayList<DcMotor>();
     ArrayList<ModernRoboticsI2cRangeSensor> mrrs = new ArrayList<ModernRoboticsI2cRangeSensor>();
@@ -116,11 +117,11 @@ public class BT_HARDCODE extends OpMode
 
         //Moves the robot towards the wall near the tray until the we are 16 inches away.
         //Detects the distance from the wall using a range sensor.
-        rangeState = new MoveState(motors, 2000, 0.5);
+        rangeState = new MoveState(motors, 1500, 0.5);
 
         //Turns the robot around 270 degrees clockwise (which is 90 degrees ccw) so that our
         //touch sensor is facing the foundation.
-        turnState = new GyroTurnCWByPID(250, .3, motors, imu);
+        turnState = new GyroTurnCWByPID(220, .3, motors, imu);
 
         //Drives until the touch sensor button is pressed by driving up against the foundation.
         //The purpose of this is to drive up and position ourself next to the tray so we can pull it.
@@ -133,7 +134,9 @@ public class BT_HARDCODE extends OpMode
         //Moves our robot until we are close to the wall near the building site. Using our
         //range sensor we can detect our distance from the wall in inches and drag the tray
         //with us to score points in the building site.
-        rangeState2 = new MoveState(motors, 3000, 0.5);
+        rangeState2 = new MoveState(motors, 2000, 0.5);
+
+        stopState = new MoveState(motors, 3000, 0.0);
 
         //Detaches the robot from the tray so that we can leave it in the building site.
         //Moves the armMotor upwards.
@@ -151,7 +154,8 @@ public class BT_HARDCODE extends OpMode
         turnState.setNextState(touchState);
         touchState.setNextState(lockState);
         lockState.setNextState(rangeState2);
-        rangeState2.setNextState(lockState2);
+        rangeState2.setNextState(stopState);
+        stopState.setNextState(lockState2);
         lockState2.setNextState(parkState);
         parkState.setNextState(null);
     }

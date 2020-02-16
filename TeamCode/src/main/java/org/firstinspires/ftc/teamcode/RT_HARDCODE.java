@@ -55,6 +55,7 @@ public class RT_HARDCODE extends OpMode
     armMotorState lockState2;
     GyroTurnCWByPID turnState2;
     ColorSenseStopState parkState;
+    MoveState stopState;
 
     ArrayList<DcMotor> motors = new ArrayList<DcMotor>();
     ArrayList<ModernRoboticsI2cRangeSensor> mrrs = new ArrayList<ModernRoboticsI2cRangeSensor>();
@@ -120,7 +121,7 @@ public class RT_HARDCODE extends OpMode
 
         //Turns the robot around 270 degrees clockwise (which is 90 degrees ccw) so that our
         //touch sensor is facing the foundation.
-        turnState = new GyroTurnCWByPID(80, .3, motors, imu);
+        turnState = new GyroTurnCWByPID(50, .3, motors, imu);
 
         //Drives until the touch sensor button is pressed by driving up against the foundation.
         //The purpose of this is to drive up and position ourself next to the tray so we can pull it.
@@ -130,11 +131,11 @@ public class RT_HARDCODE extends OpMode
         //towards the building site.
         lockState = new armMotorState(armMotor, -0.7);
 
-        //Moves our robot until we are close to the wall near the building site. Using our
-        //range sensor we can detect our distance from the wall in inches and drag the tray
-        //with us to score points in the building site.
-        rangeState2 = new MoveState(motors, 3000, 0.5);
+        rangeState2 = new MoveState(motors, 2000, 0.5);
 
+        stopState = new MoveState(motors, 3000, 0.0);
+
+        //Detaches the robot from the tray so that we can leave it in the building site.
         //Moves the armMotor upwards.
         lockState2 = new armMotorState(armMotor, 0.0);
 

@@ -60,7 +60,7 @@ public class ColorSenseStopState implements State {
                 rightBack.setPower(-pow);
             }
 
-            if(/*cs1.red()> 1000 && */cs1.red()>cs1.blue() && cs1.red()>cs1.green()){
+            if(/*cs1.red()> 1000 && */cs1.red()>=cs1.blue() && cs1.red()>=cs1.green()){
                 leftBack.setPower(0);
                 leftFront.setPower(0);
                 rightBack.setPower(0);
@@ -96,7 +96,7 @@ public class ColorSenseStopState implements State {
                 rightBack.setPower(-pow);
             }
 
-            if(/*cs1.blue()> 1000 &&*/ cs1.blue()>cs1.red() && cs1.blue()>cs1.green()){
+            if(/*cs1.blue()> 1000 &&*/ cs1.blue()>=cs1.red() && cs1.blue()>=cs1.green()){
                 leftBack.setPower(0);
                 leftFront.setPower(0);
                 rightBack.setPower(0);

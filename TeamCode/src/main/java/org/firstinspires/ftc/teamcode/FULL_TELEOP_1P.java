@@ -136,7 +136,7 @@ public class FULL_TELEOP_1P extends OpMode {
                 liftMotor.setPower(1.0);
             }
             if (gamepad1.left_trigger > 0.0) {
-                liftMotor.setPower(-1.0); // hello erin
+                liftMotor.setPower(-1.0); // hello erinaq
             }
             if (gamepad1.right_trigger <= 0.0 && gamepad1.left_trigger <= 0.0) {
                 liftMotor.setPower(0.0);
@@ -150,22 +150,34 @@ public class FULL_TELEOP_1P extends OpMode {
         //mechanism. You press the button once to activate the wheels and then press
         //the button again to switch the direction of the wheels. You press the bumper
         //to stop the wheels.
+        /*
         if (gamepad1.x && spin == 0) // in
         {
+            gamepad1.x = false;
             intakeMotor.setPower(1);
             spin ^= 1;
-            telemetry.addData("INTAKE", "0");
+            telemetry.addLine(spin + "");
             telemetry.update();
-        } else if (gamepad1.x && spin == 1)// stops intaking
+        }
+        if (gamepad1.x && spin == 1)// stops intaking
         {
+            gamepad1.x = false;
             intakeMotor.setPower(0);
             spin ^= 1;
-            telemetry.addData("INTAKE", "1");
+            telemetry.addLine(spin+"");
             telemetry.update();
-        } else if (gamepad1.y) { // outtakes
+        }
+        if (gamepad1.y) { // outtakes
             intakeMotor.setPower(-1);
             spin = 0;
-        }
+            telemetry.addLine(spin+"");
+            telemetry.update();
+        }*/
+        if(gamepad1.x) intakeMotor.setPower(1);
+        if(gamepad1.y) intakeMotor.setPower(-1);
+        if(gamepad1.b) intakeMotor.setPower(0);
+
+
 
 
         /*
@@ -174,18 +186,11 @@ public class FULL_TELEOP_1P extends OpMode {
         //This code gives us manual control the arm that we use to pull
         //the foundation. This means that we are able to reposition the tray during
         //tele-op if needed and during endgame.
-        double power;
-        power = gamepad1.dpad_up ? 0.3 : 0;
-            armMotor.setPower(power);
+        if(gamepad1.dpad_up)
+            armMotor.setPower(-0.7);
 
-        power = gamepad1.dpad_up ? -0.5 : 0;
-            armMotor.setPower(power);
+        if(gamepad1.dpad_down)
+            armMotor.setPower(0.7);
 
-        /*
-        ---TELEMETRY & TESTING---
-         */
-        telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.addData("Motors", "left (%.2f), right (%.2f)", rfDrive, rbDrive, lbDrive, rbDrive);
-        telemetry.update();
     }
 }

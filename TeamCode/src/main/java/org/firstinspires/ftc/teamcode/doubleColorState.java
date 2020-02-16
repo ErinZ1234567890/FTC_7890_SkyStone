@@ -112,7 +112,7 @@ public class doubleColorState implements State{
                 rightBack.setPower(-pow);
             }
 
-            if(cs1.blue()<100 && cs1.green()<100 && cs1.red()<100 && cs2.blue()<100 && cs2.green()<100 && cs2.red()<100){
+            if((!(cs1.blue()<cs1.red()) || !(cs1.blue()<cs1.green())) && (!(cs2.blue()<cs2.red()) || !(cs2.blue()<cs2.green()))){
                 leftBack.setPower(0);
                 leftFront.setPower(0);
                 rightBack.setPower(0);
