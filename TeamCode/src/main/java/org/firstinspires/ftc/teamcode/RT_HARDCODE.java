@@ -117,11 +117,11 @@ public class RT_HARDCODE extends OpMode
 
         //Moves the robot towards the wall near the tray until the we are 16 inches away.
         //Detects the distance from the wall using a range sensor.
-        rangeState = new MoveState(motors, 2000, 0.5);
+        rangeState = new MoveState(motors, 2000, 0.33);
 
         //Turns the robot around 270 degrees clockwise (which is 90 degrees ccw) so that our
         //touch sensor is facing the foundation.
-        turnState = new GyroTurnCWByPID(50, .3, motors, imu);
+        turnState = new GyroTurnCWByPID(50, .33, motors, imu);
 
         //Drives until the touch sensor button is pressed by driving up against the foundation.
         //The purpose of this is to drive up and position ourself next to the tray so we can pull it.
@@ -131,7 +131,7 @@ public class RT_HARDCODE extends OpMode
         //towards the building site.
         lockState = new armMotorState(armMotor, -0.7);
 
-        rangeState2 = new MoveState(motors, 2000, 0.5);
+        rangeState2 = new MoveState(motors, 4000, 0.3);
 
         stopState = new MoveState(motors, 3000, 0.0);
 
@@ -141,7 +141,7 @@ public class RT_HARDCODE extends OpMode
 
         //Drives up towards the bridge and stops once we are directly under it. Our color
         //sensor detects the colored tape on the ground and turns off the power in the wheels.
-        parkState = new ColorSenseStopState(motors, colorSensor, "red", 0.5, "right");
+        parkState = new ColorSenseStopState(motors, colorSensor, "red", 0.2, "right");
 
         /*
         ---ORDERING STATES---

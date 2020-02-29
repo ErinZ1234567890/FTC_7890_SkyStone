@@ -134,7 +134,7 @@ public class BT_HARDCODE extends OpMode
         //Moves our robot until we are close to the wall near the building site. Using our
         //range sensor we can detect our distance from the wall in inches and drag the tray
         //with us to score points in the building site.
-        rangeState2 = new MoveState(motors, 2000, 0.5);
+        rangeState2 = new MoveState(motors, 10009, 0.8);
 
         stopState = new MoveState(motors, 3000, 0.0);
 

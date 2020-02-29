@@ -54,7 +54,7 @@ public class MoveState implements State{
     public State update(){
         move("forward", power);
         wait(time);
-
+        stop(leftFront,rightFront,leftBack,rightBack);
         return NextState;
     }
 

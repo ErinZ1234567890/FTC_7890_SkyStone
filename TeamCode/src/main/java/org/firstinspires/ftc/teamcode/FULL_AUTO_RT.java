@@ -116,15 +116,15 @@ public class FULL_AUTO_RT extends OpMode
         /*
         ---USING STATES---
          */
-        rangeState = new distanceMoveState(motors, distanceSensor, 16, 0.5); //16 is a test value for now
-        turnState = new GyroTurnCWByPID(80, .3, motors, imu);
+        rangeState = new distanceMoveState(motors, distanceSensor, 16, 0.2); //16 is a test value for now
+        turnState = new GyroTurnCWByPID(80, .2, motors, imu);
         touchState = new touchMoveState(motors, ts);
         //armState = new armMoveState(armServo, 1.0);
         lockState = new armMotorState(armMotor, -0.5);
-        rangeState2 = new distanceMoveState(motors, distanceSensor, 9, 0.3);
+        rangeState2 = new distanceMoveState(motors, distanceSensor, 9, 0.2);
         lockState2 = new armMotorState(armMotor, 0.0);
-        turnState2 = new GyroTurnCWByPID(80, .3, motors, imu);
-        parkState = new ColorSenseStopState(motors, colorSensor, "red", 0.5, "forward");
+        //turnState2 = new GyroTurnCWByPID(80, .2, motors, imu);
+        parkState = new ColorSenseStopState(motors, colorSensor, "red", 0.2, "right");
 
         /*
         ---ORDERING STATES---
@@ -133,8 +133,8 @@ public class FULL_AUTO_RT extends OpMode
         turnState.setNextState(touchState);
         touchState.setNextState(lockState);
         lockState.setNextState(rangeState2);
-        rangeState2.setNextState(turnState2);
-        turnState2.setNextState(lockState2);
+        rangeState2.setNextState(lockState2);
+        //turnState2.setNextState(lockState2);
         lockState2.setNextState(parkState);
         parkState.setNextState(null);
     }
