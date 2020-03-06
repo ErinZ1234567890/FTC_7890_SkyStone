@@ -26,12 +26,13 @@ public class EncoderState implements State{
     boolean isMoved = false;
     double power;
     boolean x = false;
+    int target;
 
     //Setting up encoder variables
     HardwarePushbot robot   = new HardwarePushbot();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
 
-    static final double     COUNTS_PER_MOTOR_REV    = 1440;    // eg: TETRIX Motor Encoder
+    static final double     COUNTS_PER_MOTOR_REV    = 1120;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 1.0;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 4.0;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
@@ -71,14 +72,14 @@ public class EncoderState implements State{
         move("forward", power);
         wait(time);
         */
+        encoderDrive(15);
         stop(leftFront,rightFront,leftBack,rightBack);
         return NextState;
     }
 
     public void encoderDrive(double timeout) {
-        int target;
-
         target = leftFront.getCurrentPosition() + (int)(dist*COUNTS_PER_INCH);
+
         leftFront.setTargetPosition(target);
         rightFront.setTargetPosition(target);
         leftBack.setTargetPosition(target);
@@ -126,6 +127,8 @@ public class EncoderState implements State{
     public boolean getX() {
         return x;
     }
+    public int getTarget() {return target;}
+    public int getPos() {return leftFront.getCurrentPosition();}
 
 
 

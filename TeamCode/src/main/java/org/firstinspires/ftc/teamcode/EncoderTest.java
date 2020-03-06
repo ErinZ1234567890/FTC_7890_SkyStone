@@ -16,7 +16,7 @@ author: 7890 Software (TEAM MEMBERS)
 GOALS: (GOALS)
 DESCRIPTION: This code is used for our autonomous when we are located on the side of the tray
  */
-@Autonomous(name="FULL AUTO PARKBLU", group="Iterative Opmode")
+@Autonomous(name="encoderbois", group="Iterative Opmode")
 public class EncoderTest extends OpMode
 {
 
@@ -41,14 +41,6 @@ public class EncoderTest extends OpMode
     ArrayList<DcMotor> motors = new ArrayList<DcMotor>();
     ArrayList<ModernRoboticsI2cRangeSensor> mrrs = new ArrayList<ModernRoboticsI2cRangeSensor>();
 
-    static final double COUNTS_PER_MOTOR_REV = 1120;    // eg: Andymark Motor Encoder
-    static final double DRIVE_GEAR_REDUCTION = .75;     // This is < 1.0 if geared UP
-    static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
-    static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-            (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double DRIVE_SPEED = 0.6;
-    static final double TURN_SPEED = 0.5;
-    int counter = 0;
 
     public void init() {
 
@@ -82,13 +74,22 @@ public class EncoderTest extends OpMode
         /*
         ---USING STATES---
          */
-        encoderDrive = new EncoderState(motors, 16, 0.5);
+        encoderDrive = new EncoderState(motors, 15, -0.3);
+
+        encoderDrive.setNextState(null);
 
     }
 
 
     @Override
     public void start(){
+        /*
+        telemetry.addData("target " , encoderDrive.getTarget());
+        telemetry.update();
+
+         */
+        telemetry.addData("pos " , encoderDrive.getPos());
+        telemetry.update();
         machine = new StateMachine(encoderDrive);
     }
 
@@ -96,9 +97,12 @@ public class EncoderTest extends OpMode
     private StateMachine machine;
     public void loop()  {
 
+        /*
        telemetry.addData("x ", encoderDrive.getX());
        telemetry.update();
-
+         */
+        telemetry.addData("pos " , encoderDrive.getPos());
+        telemetry.update();
         machine.update();
 
     }
